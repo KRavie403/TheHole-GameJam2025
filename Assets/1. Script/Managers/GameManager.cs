@@ -14,9 +14,6 @@ public class GameManager : MonoBehaviour
     private const string INGAME = "1. InGame";
     #endregion
 
-    public enum GameState { Login, MatchLobby, Ready, Start, InGame, Over, Result, Reconnect };
-    private GameState gameState;
-
     private void Start()
     {
         // 게임 시작 시 자동으로 데이터 불러오기
@@ -25,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // 예시: S 키로 저장, L 키로 로드
+        // S 키로 저장, L 키로 로드
         if (Input.GetKeyDown(KeyCode.S))
             SaveGame();
 
