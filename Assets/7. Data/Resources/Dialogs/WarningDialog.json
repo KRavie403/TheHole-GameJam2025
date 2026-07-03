@@ -1,0 +1,23 @@
+{
+  "npcName": "David",
+  "nodes": [
+    {
+      "id": 0,
+      "text": "Wait..!",
+      "duration": 3.0,
+      "choices": []
+    },
+    {
+      "id": 1,
+      "text": "That place... should not exist...",
+      "duration": 4.0,
+      "choices": []
+    },
+    {
+      "id": 2,
+      "text": "Time refuses to stay there...",
+      "duration": 5.0,
+      "choices": []
+    }
+  ]
+}
