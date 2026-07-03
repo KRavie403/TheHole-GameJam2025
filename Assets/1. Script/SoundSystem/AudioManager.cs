@@ -95,7 +95,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayBasicEffect(int index)
     {
-        if (index >= 0 && index < sfxUI.Length)
+        if (index >= 0 && index < sfxBasic.Length)
         {
             SFXSource.PlayOneShot(sfxBasic[index]);
         }
@@ -107,7 +107,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayCharacterEffect(int index)
     {
-        if (index >= 0 && index < sfxUI.Length)
+        if (index >= 0 && index < sfxCharacter.Length)
         {
             SFXSource.PlayOneShot(sfxCharacter[index]);
         }
@@ -121,7 +121,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         if (index >= 0 && index < sfxItemUse.Length)
         {
-            SFXSource.PlayOneShot(sfxBasic[index]);
+            SFXSource.PlayOneShot(sfxItemUse[index]);
         }
         else
         {
@@ -161,6 +161,19 @@ public class AudioManager : Singleton<AudioManager>
         audioSettings.musicVol = volume;
         SaveSettings();
         UpdateAllVolumes();
+    }
+
+
+    public void VanishBGM()
+    {
+        if (BGMSource != null)
+            BGMSource.Stop();
+    }
+
+    public void VanishEffect()
+    {
+        if (SFXSource != null)
+            SFXSource.Stop();
     }
 
     private void UpdateAllVolumes()
