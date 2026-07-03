@@ -1,0 +1,11 @@
+{
+  "npcName": "David",
+  "nodes": [
+    {
+      "id": 0,
+      "text": "Don't just look straight ahead. Look around.",
+      "duration": 8.0,
+      "choices": []
+    }
+  ]
+}
