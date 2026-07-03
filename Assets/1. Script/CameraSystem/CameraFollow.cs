@@ -49,46 +49,81 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (SettingsController.Inst.IsMenuActive)
+            return;
+
         if (!target) return;
 
-        // 마우스 입력 회전
+        // 마우스 입력
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
         Quaternion camRotation = Quaternion.Euler(pitch, yaw, 0);
 
-        // 카메라 위치 결정
         Vector3 desiredPosition = isFirstPerson && firstPersonViewPoint != null
             ? firstPersonViewPoint.position
             : target.position - camRotation * Vector3.forward * distance + Vector3.up * height;
 
-        // 카메라 이동 적용
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(
+            transform.position,
+            desiredPosition,
+            smoothSpeed * Time.deltaTime);
+
         transform.rotation = camRotation;
-
-        // 캐릭터 이동 & 회전 처리 (TPS)
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        Vector3 inputDir = new Vector3(h, 0, v).normalized;
-
-        if (inputDir.magnitude >= 0.1f)
-        {
-            // 카메라 기준으로 이동 방향 계산
-            Quaternion yawRotation = Quaternion.Euler(0, yaw, 0);
-            Vector3 moveDir = yawRotation * inputDir;
-
-            // 캐릭터 회전 적용
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
-            target.rotation = Quaternion.Slerp(target.rotation, targetRotation, rotationSmooth * Time.deltaTime);
-
-            // 이동 적용
-            if (characterController != null)
-            {
-                characterController.Move(moveDir * moveSpeed * Time.deltaTime);
-            }
-        }
     }
+
+    public float GetYaw()
+    {
+        return yaw;
+    }
+
+    //private void LateUpdate()
+    //{
+    //    if (SettingsController.Inst.IsMenuActive)
+    //        return;
+
+    //    if (!target) return;
+
+
+    //    // 마우스 입력 회전
+    //    yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
+    //    pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+    //    pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+
+    //    Quaternion camRotation = Quaternion.Euler(pitch, yaw, 0);
+
+    //    // 카메라 위치 결정
+    //    Vector3 desiredPosition = isFirstPerson && firstPersonViewPoint != null
+    //        ? firstPersonViewPoint.position
+    //        : target.position - camRotation * Vector3.forward * distance + Vector3.up * height;
+
+    //    // 카메라 이동 적용
+    //    transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+    //    transform.rotation = camRotation;
+
+    //    // 캐릭터 이동 & 회전 처리 (TPS)
+    //    float h = Input.GetAxis("Horizontal");
+    //    float v = Input.GetAxis("Vertical");
+    //    Vector3 inputDir = new Vector3(h, 0, v).normalized;
+
+    //    if (inputDir.magnitude >= 0.1f)
+    //    {
+    //        // 카메라 기준으로 이동 방향 계산
+    //        Quaternion yawRotation = Quaternion.Euler(0, yaw, 0);
+    //        Vector3 moveDir = yawRotation * inputDir;
+
+    //        // 캐릭터 회전 적용
+    //        Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+    //        target.rotation = Quaternion.Slerp(target.rotation, targetRotation, rotationSmooth * Time.deltaTime);
+
+    //        // 이동 적용
+    //        if (characterController != null)
+    //        {
+    //            characterController.Move(moveDir * moveSpeed * Time.deltaTime);
+    //        }
+    //    }
+    //}
 
 
 
