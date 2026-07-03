@@ -13,6 +13,7 @@ public class DialogNode
 {
     public int id;
     public string text;
+    public float duration;
     public List<DialogChoice> choices;
 }
 
