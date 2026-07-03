@@ -4,18 +4,24 @@ using TMPro;
 
 public class TypingEffect : MonoBehaviour
 {
-    public TMP_Text text;                            // 타이핑할 TMP 텍스트
-    public float startDelay = 2f;                   // 시작 지연
-    public float typingSpeed = 0.15f;           // 글자 간 딜레이
-    public float pauseBetweenTexts = 2f;    // 두 텍스트 사이 정적 시간
+    public TMP_Text text;
+    public float startDelay = 2f;
+    public float typingSpeed = 0.1f;
+    public float pauseBetweenTexts = 3f;
 
     [TextArea]
-    public string firstText = "이제 아무것도 남지 않았는데,";
+    public string firstText = "Nothing’s left now.";
+
     [TextArea]
-    public string secondText = "당신은 여전히 나를 ‘게임’이라 부를 수 있나요?";
+    public string secondText = "Would you still call this a game?";
+
+    // 대화 종료 여부
+    public bool IsFinished { get; private set; }
 
     private void Start()
     {
+        Logger.Log("TYPINGEFFECT 시작");
+        IsFinished = false;
         StartCoroutine(TypeSequence());
     }
 
@@ -33,23 +39,20 @@ public class TypingEffect : MonoBehaviour
 
     private IEnumerator TypeSequence()
     {
-        // 시작 대기
         yield return new WaitForSeconds(startDelay);
 
-        // 1번째 텍스트 타이핑
         yield return TypeText(firstText);
 
-        // 정적 시간
         yield return new WaitForSeconds(pauseBetweenTexts);
 
-        // 화면 초기화
         text.text = "";
         text.maxVisibleCharacters = 0;
 
-        // 정적 시간
         yield return new WaitForSeconds(pauseBetweenTexts);
-        
-        // 2번째 텍스트 타이핑
+
         yield return TypeText(secondText);
+
+        // 대화 종료
+        IsFinished = true;
     }
 }
