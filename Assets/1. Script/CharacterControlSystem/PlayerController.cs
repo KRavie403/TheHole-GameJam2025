@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
-        // 저장된 데이터 불러오기
-        var data = SaveSystem.LoadPlayer();
-        transform.position = data.position;
-        inventory = data.inventory;
+        //// 저장된 데이터 불러오기
+        //var data = SaveSystem.LoadPlayer();
+        //transform.position = data.position;
+        //inventory = data.inventory;
 
-        Logger.Log("[PlayerController] 플레이어 데이터 로드 완료.");
+        //Logger.Log("[PlayerController] 플레이어 데이터 로드 완료.");
     }
 
     public void LoadFromData(PlayerData data)
