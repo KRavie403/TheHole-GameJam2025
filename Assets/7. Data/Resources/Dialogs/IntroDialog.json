@@ -1,0 +1,17 @@
+{
+  "npcName": "David",
+  "nodes": [
+    {
+      "id": 0,
+      "text": "Why are you sleeping here so early? It's morning already!",
+      "duration": 8.0,
+      "choices": []
+    },
+    {
+      "id": 1,
+      "text": "What a perfect day! We keep living the same day over and over again.",
+      "duration": 10.0,
+      "choices": []
+    }
+  ]
+}
